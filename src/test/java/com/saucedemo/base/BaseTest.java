@@ -12,6 +12,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import com.saucedemo.driver.DriverManager;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class BaseTest {
 
@@ -25,9 +27,16 @@ public class BaseTest {
 
         if (browser.equalsIgnoreCase("chrome")) {
 
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-            DriverManager.setDriver(driver);
+        	WebDriverManager.chromedriver().setup();
+
+        	ChromeOptions options = new ChromeOptions();
+
+        	options.addArguments("--headless=new");
+        	options.addArguments("--no-sandbox");
+        	options.addArguments("--disable-dev-shm-usage");
+        	options.addArguments("--window-size=1920,1080");
+
+        	driver = new ChromeDriver(options);
 
         } else if (browser.equalsIgnoreCase("firefox")) {
 
